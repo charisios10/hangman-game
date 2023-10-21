@@ -5,6 +5,54 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   </head>
   <body>
-    <h1>testing</h1>
+    <h1>Hangman!</h1>
+
+    <script>
+      //create an array of words
+      var words = [
+        "javascript",
+        "monkey",
+        "amazing",
+        "pancake"
+      ];
+
+      //Pick a random word
+      var word = words[Math.floor(Math.random() * words.length)];
+
+      //Set up the answer array
+      var answerArray = [];
+      for (var i = 0; i < word.length; i++) {
+        answerArray[i] = "_";
+      }
+
+      var remainingLetters = word.length;
+
+      //game loop
+      while (reaminingLetters > 0) {
+        //show the player their proggress
+        alert(answerArray.join(" "));
+
+        //get a guess from player
+        var guess = prompt("Guess a letter, or click Cancel to stop playing.");
+        if (guess === null) {
+          //exit the game loop
+          break;
+        } else if (guess.length !== 1) {
+          alert("Please enter a single letter.");
+        } else {
+          //update the game state with guess
+          for (var j = 0; j < word.length; j++) {
+            if (word[j] === guess) {
+              answerArray[j] = guess;
+              remainingLetters--;
+            }
+          }
+        }
+      }
+
+      //show the answer and congratulate the player
+      alert(answerArray.join(" "));
+      alert("Good job! The answer was " + word);
+    </script>
   </body>
 </html>
